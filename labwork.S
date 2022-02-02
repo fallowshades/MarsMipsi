@@ -67,7 +67,7 @@ time2string:
 	
 	#POP ($a1)
 	#POP ($a0) #the previous addr
-	lw	$a1($sp)
+	lw	$a1,0($sp)
 	addi	$sp,$sp,4
 	lw	$a0,0($sp)
 	addi	$sp,$sp,4
@@ -87,7 +87,7 @@ time2string:
 	nop
 	#POP ($a1)
 	#POP ($a0) 		#addr of string
-	lw	$a1($sp)
+	lw	$a1,0($sp)
 	addi	$sp,$sp,4
 	lw	$a0,0($sp)
 	addi	$sp,$sp,4
@@ -102,9 +102,9 @@ time2string:
 #3rd letter
 	#PUSH ($a0)
 	#PUSH ($a1)
-	lw	$a1($sp)
-	addi	$sp,$sp,4
 	lw	$a0,0($sp)
+	addi	$sp,$sp,4
+	lw	$a1,0($sp)
 	addi	$sp,$sp,4
 
 	srl $a0, $a1, 4 	#take thrid digit into msb4
@@ -112,7 +112,7 @@ time2string:
 	nop
 	#POP $a1
 	#POP $a0
-	lw	$a1($sp)
+	lw	$a1,0($sp)
 	addi	$sp,$sp,4
 	lw	$a0,0($sp)
 	addi	$sp,$sp,4
@@ -206,7 +206,7 @@ done: jr $ra
 	sb $v0,	3($a0)		#store third digit
 	
 #4th letter
-	PUSH ($a0)		#argument a1 is unimportant now
+	#PUSH ($a0)		#argument a1 is unimportant now
 	addi	$sp,$sp,-4
 	sw	$a0,0($sp)
 
@@ -224,7 +224,7 @@ done: jr $ra
 	li $t2,0x00		#null terminator
 	sb $t2,5($t0)		#end of word
 	
-	POP ($ra)		#return ra
+	#POP ($ra)		#return ra
 	lw	$ra,0($sp)
 	addi	$sp,$sp,4
 	
