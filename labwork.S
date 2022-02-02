@@ -19,7 +19,10 @@
   #
   # Please add your own code below this line
   #
-.global
+.global 
+time2string
+delay
+
 .data
 	.align 2
 mytime:	.word 0x5957
@@ -47,12 +50,16 @@ L1:
   # you can write your code for subroutine "hexasc" below this line
   #but i wrote timetostring
   #
-time2string:
-  ##1st letter
-
-	#PUSH ($ra)
+##1st letter
+#PUSH ($ra)
 	#PUSH ($a0) #addr
 	#PUSH ($a1) #value //!need move to $a0 for hexasc f()
+
+
+time2string:
+  
+
+	
 	addi	$sp,$sp,-12
 	sw $ra,0($sp)
 	sw $a0, 4($sp)
@@ -148,6 +155,8 @@ time2string:
 	#$t0 = i
 	#$t1 = conditional
 	#$s1 = argumen
+
+
 delay:	move $s1, $a0
 	#addi $s1, $0, 0 #assignment // only consern outer loop
 	
@@ -231,7 +240,7 @@ done: jr $ra
 	jr $ra 			#back to the future
 	nop
 
-delaying:
+delay:
 	#$t0 = i
 	#$t1 = conditional
 	#$t2 = argument
