@@ -22,12 +22,7 @@ char textstring1[] = "text, more text, and even more text!";
 /* This function is called repetitively from the main program */
 void labwork( void )
 {
-  delay( 1000 );
-  time2string( textstring1, mytime1 ); //$s0 = addr, $a1 = value
-  display_string( 3, textstring1 );
-  display_update();
-  tick( &mytime1 );
-  display_image(96, icon);
+
 }
 #pragma endregion
 
@@ -100,8 +95,14 @@ int main(void) {
 
 	while( 1 )
 	{
-		
-	  labwork(); /* Do lab-specific things again and again */
+		  delay( 1000 );
+  time2string( textstring1, mytime1 ); //$s0 = addr, $a1 = value
+  display_string( 3, textstring1 );
+  display_update();
+  tick( &mytime1 );
+  display_image(96, icon);
+  
+	  //labwork(); /* Do lab-specific things again and again */
 	}
 	return 0;
 }
