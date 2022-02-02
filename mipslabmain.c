@@ -27,7 +27,7 @@ void labwork( void )
   display_string( 3, textstring1 );
   display_update();
   tick( &mytime1 );
-  //display_image(96, icon);
+  display_image(96, icon);
 }
 #pragma endregion
 
@@ -96,7 +96,7 @@ int main(void) {
 */	
 	
 	
-	labinit(); /* Do any lab-specific initialization */
+	//labinit(); /* Do any lab-specific initialization */
 
 	while( 1 )
 	{
