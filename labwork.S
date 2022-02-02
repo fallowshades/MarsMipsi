@@ -49,7 +49,7 @@ L1:
   #
 time2string:
   ##1st letter
-
+ls
 	#PUSH ($ra)
 	#PUSH ($a0) #addr
 	#PUSH ($a1) #value //!need move to $a0 for hexasc f()
@@ -198,7 +198,7 @@ done: jr $ra
 	nop
 	POP $a1
 	POP $a0
-	lw	$a1($sp)
+	lw	$a1, 0($sp)
 	addi	$sp,$sp,4
 	lw	$a0,0($sp)
 	addi	$sp,$sp,4
@@ -231,7 +231,7 @@ done: jr $ra
 	jr $ra 			#back to the future
 	nop
 
-delay:
+delaying:
 	#$t0 = i
 	#$t1 = conditional
 	#$t2 = argument
@@ -240,12 +240,12 @@ delay:
 	addi $t2, $t0, 5######hard code argument
 	
 ##outer brackets
-while: 
+whileing: 
 
 
 	#condition
 	slt $t1, $0 , $t2	#0 < $a0  --> 1 if ture(the reverse statement
-	bne $t1, $0, done	#t1 = conditiond-> do if not equal, ie logic 1=true
+	bne $t1, $0, doneing	#t1 = conditiond-> do if not equal, ie logic 1=true
 	nop
 	#logic
 	addi $t2, $t2, -1	#ms = ms - 1
@@ -253,16 +253,16 @@ while:
 	addi $t0, $0, 0 #initiate i
 	
 ##inner brackets
-for:
+foring:
 	slt $t1, $t0, $t3  #i < delay --> 1 if ture
-	beq $t1,$0, while	#back to while once i is not< constant
+	beq $t1,$0, whileing	#back to while once i is not< constant
 	nop
 	
 	addi $t0, $t0, 1		#i++
-	j for
+	j foring
 	nop
 ##
-done: 
+doneing: 
 
 	jr $ra
 	nop
