@@ -19,7 +19,7 @@
   #
   # Please add your own code below this line
   #
-.global time2string
+
 .global delay
 
 
