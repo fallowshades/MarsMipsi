@@ -49,28 +49,50 @@ L1:
   #
 time2string:
   ##1st letter
-	PUSH ($ra)
-	PUSH ($a0) #addr
-	PUSH ($a1) #value //!need move to $a0 for hexasc f()
+
+	#PUSH ($ra)
+	#PUSH ($a0) #addr
+	#PUSH ($a1) #value //!need move to $a0 for hexasc f()
+	addi	$sp,$sp,-12
+	sw $ra,0($sp)
+	sw $a0, 4($sp)
+	sw $a1, 8($sp)
 	
+
+
 	#conform such hexasc mask bottom bits-> store in $a0
 	srl $a0, $a1, 12 #shift towards 1st hour digit
 	jal hexasc #will mask 4bit & convert
 	nop
 	
-	POP ($a1)
-	POP ($a0) #the previous addr
+	#POP ($a1)
+	#POP ($a0) #the previous addr
+	lw	$a1($sp)
+	addi	$sp,$sp,4
+	lw	$a0,0($sp)
+	addi	$sp,$sp,4
 	
 	sb $v0,	0($a0)		#store at 1st string byte
 	
 ##2nd letter
-	PUSH ($a0)
-	PUSH ($a1)
+	#PUSH ($a0)
+	#PUSH ($a1)	
+	addi	$sp,$sp,-4
+	sw	$a0,0($sp)
+	addi	$sp,$sp,-4
+	sw	$a1,0($sp)
+
 	srl $a0, $a1, 8 	#take second digit into msb4
 	jal hexasc		#convert to char
 	nop
-	POP ($a1)
-	POP ($a0) 		#addr of string
+	#POP ($a1)
+	#POP ($a0) 		#addr of string
+	lw	$a1($sp)
+	addi	$sp,$sp,4
+	lw	$a0,0($sp)
+	addi	$sp,$sp,4
+
+
 	sb $v0,	1($a0)		#store second digit at next index
 	
 ##coolon
@@ -78,46 +100,60 @@ time2string:
 	sb $t2,2($t0)
 	
 #3rd letter
-	PUSH ($a0)
-	PUSH ($a1)
+	#PUSH ($a0)
+	#PUSH ($a1)
+	lw	$a1($sp)
+	addi	$sp,$sp,4
+	lw	$a0,0($sp)
+	addi	$sp,$sp,4
+
 	srl $a0, $a1, 4 	#take thrid digit into msb4
 	jal hexasc		#convert to char
 	nop
-	POP $a1
-	POP $a0
+	#POP $a1
+	#POP $a0
+	lw	$a1($sp)
+	addi	$sp,$sp,4
+	lw	$a0,0($sp)
+	addi	$sp,$sp,4
+
 	sb $v0,	3($a0)		#store third digit
 	
 #4th letter
-	PUSH ($a0)		#argument a1 is unimportant now
+	#PUSH ($a0)		#argument a1 is unimportant now
+	addi	$sp,$sp,-4
+	sw	$a0,0($sp)
+
 	move $a0, $a1		#last digit such correct argument register
 	
 #null terminator	
 	jal hexasc		##convert to char
 	nop
-	POP $t0
+	#POP ($a0)
+	lw	$a0,0($sp)
+	addi	$sp,$sp,4
+
 	sb $v0,	4 ($t0) 		#store 5th byte
 	
 	li $t2,0x00		#null terminator
 	sb $t2,5($t0)		#end of word
 	
-	POP ($ra)		#return ra
+	#POP ($ra)		#return ra
+	lw	$ra,0($sp)
+	addi	$sp,$sp,4
 	
 	jr $ra 			#back to the future
 	nop
 
-delay:
 	#$t0 = i
 	#$t1 = conditional
 	#$s1 = argumen
-	move $s1, $a0
+delay:	move $s1, $a0
 	#addi $s1, $0, 0 #assignment // only consern outer loop
 	
 ##outer brackets
-while: 
-
-
 	#whil3e( 0 < arg)
-	slt $t1, $0 , $s1	#0 < $a0  --> 1 if ture(the reverse statement
+while: 	slt $t1, $0 , $s1	#0 < $a0  --> 1 if ture(the reverse statement
 	bne $t1, $0, done	#t1 = conditiond-> do if not equal, ie logic 1=true
 	#beq $s1, $0, done #if equal other wise 0 = rist infinite loops (-1 is counter productive)
 	#beq $t1, $0, done #if state ment if less than
@@ -132,19 +168,16 @@ while:
 	addi $t3, $0, 4711
 	
 ##inner brackets
-for:
 	#i <4711
-	slt $t1, $t0, $t3  #i < delay --> 1 if ture
+for: slt $t1, $t0, $t3  #i < delay --> 1 if ture
 	beq $t1,$0, while	#back to while once i is not< constant
 	nop
 	
-	addi $t0, $t0 1		#i++
+	addi $t0, $t0, 1		#i++
 	j for
 	nop
 ##
-done: 
-
-	jr $ra
+done: jr $ra
 	nop
 	
 
@@ -152,29 +185,48 @@ done:
 
 	
 #3rd letter
-	PUSH ($a0)
-	PUSH ($a1)
+	#PUSH ($a0)
+	#PUSH ($a1)
+
+	addi	$sp,$sp,-4
+	sw	$a0,0($sp)
+	addi	$sp,$sp,-4
+	sw	$a1,0($sp)
+
 	srl $a0, $a1, 4 	#take thrid digit into msb4
 	jal hexasc		#convert to char
 	nop
 	POP $a1
 	POP $a0
+	lw	$a1($sp)
+	addi	$sp,$sp,4
+	lw	$a0,0($sp)
+	addi	$sp,$sp,4
+
 	sb $v0,	3($a0)		#store third digit
 	
 #4th letter
 	PUSH ($a0)		#argument a1 is unimportant now
+	addi	$sp,$sp,-4
+	sw	$a0,0($sp)
+
 	move $a0, $a1		#last digit such correct argument register
 	
 #null terminator	
 	jal hexasc		##convert to char
 	nop
-	POP $t0
+	#POP $a0
+	lw	$a0,0($sp)
+	addi	$sp,$sp,4
+
 	sb $v0,	4 ($t0) 		#store 5th byte
 	
 	li $t2,0x00		#null terminator
 	sb $t2,5($t0)		#end of word
 	
 	POP ($ra)		#return ra
+	lw	$ra,0($sp)
+	addi	$sp,$sp,4
 	
 	jr $ra 			#back to the future
 	nop
@@ -206,7 +258,7 @@ for:
 	beq $t1,$0, while	#back to while once i is not< constant
 	nop
 	
-	addi $t0, $t0 1		#i++
+	addi $t0, $t0, 1		#i++
 	j for
 	nop
 ##
