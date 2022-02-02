@@ -30,8 +30,8 @@ mytime:	.word 0x5957
 timstr:	.ascii "text more text lots of text\0"
 
  
-delay: .global
-time2string: .global
+
+
 
 	.text
 
@@ -56,7 +56,7 @@ L1:
   # you can write your code for subroutine "hexasc" below this line
   #but i wrote timetostring
   #
-
+.global time2string
 time2string:
   ##1st letter
 	PUSH $ra
@@ -115,7 +115,7 @@ time2string:
 	jr $ra 			#back to the future
 	nop
 
-
+.global delay 
 delay:
 	#$t0 = i
 	#$t1 = conditional
