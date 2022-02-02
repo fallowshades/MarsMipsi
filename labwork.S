@@ -19,9 +19,9 @@
   #
   # Please add your own code below this line
   #
-.global 
-time2string.text+0x52
-delay .text+0x78
+.global time2string
+.global delay
+
 
 .data
 	.align 2
