@@ -85,6 +85,7 @@ int main(void) {
 	SPI2CONSET = 0x8000;
 #pragma endregion
 
+/*
 	display_init();
 	display_string(0, "KTH/ICT lab");
 	display_string(1, "in Computer");
@@ -92,7 +93,7 @@ int main(void) {
 	display_string(3, "Welcome!");
 	display_update();
 	display_image(96, icon);
-	
+*/	
 	
 	
 	labinit(); /* Do any lab-specific initialization */
