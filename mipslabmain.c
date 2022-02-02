@@ -14,19 +14,19 @@
 #include <pic32mx.h>  /* Declarations of system-specific addresses etc */
 #include "mipslab.h"  /* Declatations for these labs */
 
-int mytime = 0x5957;
+int mytime1 = 0x5957;
 
-char textstring[] = "text, more text, and even more text!";
+char textstring1[] = "text, more text, and even more text!";
 
 #pragma region executionOrder
 /* This function is called repetitively from the main program */
 void labwork( void )
 {
   delay( 1000 );
-  time2string( textstring, mytime ); //$s0 = addr, $a1 = value
-  display_string( 3, textstring );
+  time2string( textstring1, mytime1 ); //$s0 = addr, $a1 = value
+  display_string( 3, textstring1 );
   display_update();
-  tick( &mytime );
+  tick( &mytime1 );
   //display_image(96, icon);
 }
 #pragma endregion
@@ -71,7 +71,7 @@ int main(void) {
 	TRISDSET = (1 << 8);
 	TRISFSET = (1 << 1);
 	
-#pragma region syncronize GPIO port also
+#pragma region syncronize GPIO port alsols
 	/* Set up SPI as master */
 	SPI2CON = 0;
 	SPI2BRG = 4;
