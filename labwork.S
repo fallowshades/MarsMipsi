@@ -240,41 +240,5 @@ done: jr $ra
 	jr $ra 			#back to the future
 	nop
 
-delay:
-	#$t0 = i
-	#$t1 = conditional
-	#$t2 = argument
-	addi $t3, $0, 4711
-	move $a0, $t2
-	addi $t2, $t0, 5######hard code argument
-	
-##outer brackets
-whileing: 
-
-
-	#condition
-	slt $t1, $0 , $t2	#0 < $a0  --> 1 if ture(the reverse statement
-	bne $t1, $0, doneing	#t1 = conditiond-> do if not equal, ie logic 1=true
-	nop
-	#logic
-	addi $t2, $t2, -1	#ms = ms - 1
-	#nested block initialization
-	addi $t0, $0, 0 #initiate i
-	
-##inner brackets
-foring:
-	slt $t1, $t0, $t3  #i < delay --> 1 if ture
-	beq $t1,$0, whileing	#back to while once i is not< constant
-	nop
-	
-	addi $t0, $t0, 1		#i++
-	j foring
-	nop
-##
-doneing: 
-
-	jr $ra
-	nop
-	
 
 
