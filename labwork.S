@@ -29,8 +29,9 @@
 mytime:	.word 0x5957
 timstr:	.ascii "text more text lots of text\0"
 
-.global delay
-.global time2string
+ 
+delay: .global
+time2string: .global
 
 	.text
 
