@@ -49,7 +49,7 @@ L1:
   #
 time2string:
   ##1st letter
-ls
+
 	#PUSH ($ra)
 	#PUSH ($a0) #addr
 	#PUSH ($a1) #value //!need move to $a0 for hexasc f()
