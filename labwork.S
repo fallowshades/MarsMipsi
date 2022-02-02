@@ -24,7 +24,7 @@
 .global time2string
 
 
-.datac
+.data
 	.align 2
 mytime:	.word 0x5957
 timstr:	.ascii "text more text lots of text\0"
@@ -142,7 +142,7 @@ for:
 	beq $t1,$0, while	#back to while once i is not< constant
 	nop
 	
-	addi $t0, $t0 1		#i++
+	addi $t0, $t0, 1		#i++
 	j for
 	nop
 ##
