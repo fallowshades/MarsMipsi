@@ -93,8 +93,7 @@ int main(void) {
 	
 	//labinit(); /* Do any lab-specific initialization */
 
-	while( 1 )
-	{
+	
 		  delay( 1000 );
   time2string( textstring1, mytime1 ); //$s0 = addr, $a1 = value
   display_string( 3, textstring1 );
@@ -103,6 +102,9 @@ int main(void) {
   display_image(96, icon);
   
 	  //labwork(); /* Do lab-specific things again and again */
+
+	  while( 1 )
+	{
 	}
 	return 0;
 }
