@@ -21,6 +21,7 @@
   #
 
 .global delay
+time2string
 
 
 .data
