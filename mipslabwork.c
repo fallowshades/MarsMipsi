@@ -36,9 +36,9 @@ void labwork( void )
 {
   delay( 1000 );
   time2string( textstring, mytime );
-  display_string( 3, textstring );
+ // display_string( 3, textstring );
   display_update();
   tick( &mytime );
-  display_image(96, icon);
+  //display_image(96, icon);
 }
 #pragma endregion
