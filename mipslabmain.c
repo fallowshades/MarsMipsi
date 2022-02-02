@@ -14,6 +14,24 @@
 #include <pic32mx.h>  /* Declarations of system-specific addresses etc */
 #include "mipslab.h"  /* Declatations for these labs */
 
+int mytime = 0x5957;
+
+char textstring[] = "text, more text, and even more text!";
+
+#pragma region executionOrder
+/* This function is called repetitively from the main program */
+void labwork( void )
+{
+  delay( 1000 );
+  time2string( textstring, mytime ); //$s0 = addr, $a1 = value
+  display_string( 3, textstring );
+  display_update();
+  tick( &mytime );
+  //display_image(96, icon);
+}
+#pragma endregion
+
+
 int main(void) {
 
 	#pragma region syncronization peripheral

@@ -32,13 +32,17 @@ void labinit( void )
 
 #pragma region executionOrder
 /* This function is called repetitively from the main program */
+
+/*
 void labwork( void )
 {
   delay( 1000 );
-  time2string( *textstring, mytime ); //$s0 = addr, $a1 = value
+  time2string( textstring, mytime ); //$s0 = addr, $a1 = value
   display_string( 3, textstring );
   display_update();
   tick( &mytime );
   //display_image(96, icon);
 }
 #pragma endregion
+
+*/
